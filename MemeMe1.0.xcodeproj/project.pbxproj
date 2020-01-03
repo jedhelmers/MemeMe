@@ -15,6 +15,7 @@
 		1E295A6523BD6BF800B87F14 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1E295A6323BD6BF800B87F14 /* LaunchScreen.storyboard */; };
 		1E295A7023BD6BF800B87F14 /* MemeMe1_0Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E295A6F23BD6BF800B87F14 /* MemeMe1_0Tests.swift */; };
 		1E295A7B23BD6BF800B87F14 /* MemeMe1_0UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E295A7A23BD6BF800B87F14 /* MemeMe1_0UITests.swift */; };
+		1E295A8923BD726300B87F14 /* Meme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1E295A8823BD726300B87F14 /* Meme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		1E295A7623BD6BF800B87F14 /* MemeMe1.0UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MemeMe1.0UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1E295A7A23BD6BF800B87F14 /* MemeMe1_0UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeMe1_0UITests.swift; sourceTree = "<group>"; };
 		1E295A7C23BD6BF800B87F14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1E295A8823BD726300B87F14 /* Meme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				1E295A5A23BD6BF700B87F14 /* SceneDelegate.swift */,
 				1E295A5C23BD6BF700B87F14 /* ViewController.swift */,
 				1E295A5E23BD6BF700B87F14 /* Main.storyboard */,
+				1E295A8823BD726300B87F14 /* Meme.swift */,
 				1E295A6123BD6BF800B87F14 /* Assets.xcassets */,
 				1E295A6323BD6BF800B87F14 /* LaunchScreen.storyboard */,
 				1E295A6623BD6BF800B87F14 /* Info.plist */,
@@ -260,6 +263,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1E295A5D23BD6BF700B87F14 /* ViewController.swift in Sources */,
+				1E295A8923BD726300B87F14 /* Meme.swift in Sources */,
 				1E295A5923BD6BF700B87F14 /* AppDelegate.swift in Sources */,
 				1E295A5B23BD6BF700B87F14 /* SceneDelegate.swift in Sources */,
 			);
@@ -437,6 +441,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NT2X683237;
 				INFOPLIST_FILE = MemeMe1.0/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -455,6 +460,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = NT2X683237;
 				INFOPLIST_FILE = MemeMe1.0/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
