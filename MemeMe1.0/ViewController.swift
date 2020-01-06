@@ -20,6 +20,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     override func viewWillAppear(_ animated: Bool) {
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
+        self.subscribeToKeyboardNotifications()
     }
     
     override func viewDidLoad() {
@@ -43,12 +44,23 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
 
     @objc func keyboardWillShow(_ notification:Notification) {
         if bottomTextField.isEditing{
-        view.frame.origin.y = -getKeyboardHeight(notification)
+            view.frame.origin.y = -getKeyboardHeight(notification)
         }
     }
     
     @objc func keyboardWillHide(_ notification:Notification) {
         view.frame.origin.y = 0.0
+    }
+    
+    func subscribeToKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: UIResponder.keyboardDidShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    func unsubscribeFromKeyboardNotifications() {
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardDidShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardDidHideNotification, object: nil)
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -85,7 +97,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func save(_ memeImg: UIImage) {
-        _ = Meme(topText: self.topTextField.text!, bottomText: self.bottomTextField.text!, image: self.imagePickerView.image!, memeImage: memeImg)
+        let meme = Meme(topText: self.topTextField.text!, bottomText: self.bottomTextField.text!, image: self.imagePickerView.image!, memeImage: memeImg)
+        
+        let obj = UIApplication.shared.delegate
+        let appDelegate = obj as! AppDelegate
+        appDelegate.memes.append(meme)
     }
     
     func chooseSourceType(sourceType: UIImagePickerController.SourceType) {
@@ -125,7 +141,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         activityController.completionWithItemsHandler = {
             activity, completed, item, error in
             if completed {
-                self .save(memeImg)
+                self.save(memeImg)
                 self.dismiss(animated: true, completion: nil)
             }
         }
@@ -134,6 +150,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     @IBAction func cancelAction(_ sender: UIBarButtonItem) {
         self.setup()
+        dismiss(animated: true, completion: nil)
     }
 }
 
