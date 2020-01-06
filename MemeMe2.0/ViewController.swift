@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITabBarControllerDelegate, UITextFieldDelegate {
     
+    let textFieldDelegate = TextFieldDelegate()
+    
     @IBOutlet weak var saveMemeButton: UIBarButtonItem!
     @IBOutlet weak var imagePickerView: UIImageView!
     @IBOutlet weak var topTextField: UITextField!
@@ -26,7 +28,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        
+        self.setupDelegate()
         self.setup()
     }
     
@@ -37,6 +39,11 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         self.saveMemeButton.isEnabled = false
     }
 
+    func setupDelegate() {
+        self.topTextField.delegate = self.textFieldDelegate
+        self.bottomTextField.delegate = self.textFieldDelegate
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
@@ -60,12 +67,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     func unsubscribeFromKeyboardNotifications() {
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardDidShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardDidHideNotification, object: nil)
-        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        view.endEditing(true)
-//        super.touchesBegan(touches, with: event)
         self.topTextField.resignFirstResponder()
         self.bottomTextField.resignFirstResponder()
     }
