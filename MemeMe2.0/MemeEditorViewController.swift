@@ -41,10 +41,20 @@ class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegat
     }
 
     func setTextFieldAttributes(_ textField: UITextField, withText text: String) {
+        let memeTextAttributes: [NSAttributedString.Key: Any] = [
+            NSAttributedString.Key.strokeColor: UIColor.black,
+            NSAttributedString.Key.foregroundColor: UIColor.white,
+            NSAttributedString.Key.font: UIFont(name: "Futura-CondensedExtraBold", size: 40)!,
+            NSAttributedString.Key.strokeWidth: -3.0
+        ]
+        
+        textField.defaultTextAttributes = memeTextAttributes
+
         textField.delegate = self
         textField.textAlignment = .center
         textField.text = text
         textField.borderStyle = .none
+//        textField.
     }
     
     func setupDelegate() {
