@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITabBarControllerDelegate, UITextFieldDelegate {
+class MemeEditorViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITabBarControllerDelegate, UITextFieldDelegate {
     
     let textFieldDelegate = TextFieldDelegate()
     
@@ -19,6 +19,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var toolbar: UIToolbar!
+
     
     override func viewWillAppear(_ animated: Bool) {
         cameraButton.isEnabled = UIImagePickerController.isSourceTypeAvailable(.camera)
@@ -33,12 +34,19 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
     func setup() {
-        self.topTextField.text = "TOP"
-        self.bottomTextField.text = "BOTTOM"
+        self.setTextFieldAttributes(self.topTextField, withText: "TOP")
+        self.setTextFieldAttributes(self.bottomTextField, withText: "BOTTOM")
         self.imagePickerView.image = nil
         self.saveMemeButton.isEnabled = false
     }
 
+    func setTextFieldAttributes(_ textField: UITextField, withText text: String) {
+        textField.delegate = self
+        textField.textAlignment = .center
+        textField.text = text
+        textField.borderStyle = .none
+    }
+    
     func setupDelegate() {
         self.topTextField.delegate = self.textFieldDelegate
         self.bottomTextField.delegate = self.textFieldDelegate
@@ -113,6 +121,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
         imagePicker.sourceType = sourceType
+        
         present(imagePicker, animated: true, completion: nil)
     }
     
@@ -120,7 +129,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         
         if let image = info[.editedImage] as? UIImage {
             imagePickerView.image = image
-            imagePickerView.contentMode = .scaleAspectFill
+            imagePickerView.contentMode = .scaleAspectFit
             self.saveMemeButton.isEnabled = true
         } else if let image = info[.originalImage] as? UIImage {
             imagePickerView.image = image
